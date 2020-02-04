@@ -14,8 +14,9 @@ function payInvoice() {
 }
 
 const createToken = async () => {
-	var myBody ='{"Payments" : [{"MerchantId" : "'+ $("#MerchantId").val() +'","OrderNumber" : "'+ $("#OrderNumber").val() +'","ItemList" : "'+ $("#ItemList").val() +'","Amount" : '+ $("#Amount").val() +'}],"SourceAppId" : 999,"SourceUserId" : "0","ReturnUrl" : "Http://google.com","ReturnData" : "TestFromPostman","HeadingText" : "ClarityFirst Test Payment","SubHeadings" : {"SH1": "Subheading 1", "SH2": "Subheading 2"},"ClientProcessingMessage" : "Please Wait While We Process your Payment...","ReturnValues" : {"ErrorURL" : "https://stage.fabill.firstam.com/Home/Error","NextItemKey" : "NextItemValue"}}';
-	$("#responseArea").val(JSON.stringify(JSON.parse(myBody), null, 2));
+	var myBody ='{"Payments" : [{"MerchantId" : "'+ $("#MerchantId").val() +  '","PaymentModelId" : "'+ $("#PaymentModelId").val() +'","OrderNumber" : "'+ $("#OrderNumber").val() +'","ItemList" : "'+ $("#ItemList").val() +'","Amount" : '+ $("#Amount").val() +'}], "PaymentModelId" : "'+ $("#PaymentModelId").val() + '","SourceAppId" : 999,"SourceUserId" : "' + $("#SourceUserId").val() + '","ReturnUrl" : "Http://google.com","ReturnData" : "TestFromPostman","HeadingText" : "ClarityFirst Test Payment","SubHeadings" : {"SH1": "Subheading 1", "SH2": "Subheading 2"},"ClientProcessingMessage" : "Please Wait While We Process your Payment...","ReturnValues" : {"ErrorURL" : "https://stage.fabill.firstam.com/Home/Error","NextItemKey" : "NextItemValue"}}';
+	//$("#responseArea").val(JSON.stringify(JSON.parse(myBody), null, 2));
+	$("#responseArea").val(myBody);
 	const response = await fetch('http://localhost:8080/http://stage.nwdwebservices.firstam.net/CreditCardPaymentsAPI/api/v1/PaymentToken', {
 		method: 'POST',
 		body: myBody, // string or object
